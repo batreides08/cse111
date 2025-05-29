@@ -1,3 +1,11 @@
+import os
+
+# Get the directory where this script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
+wordlist_path = os.path.join(script_dir, "wordlist.txt")
+toplist_path = os.path.join(script_dir, "toppasswords.txt")
+
+
 # Constants for character types
 LOWER = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 UPPER = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
@@ -39,10 +47,10 @@ def word_complexity(word):
 
 # Function to calculate password strength
 def password_strength(password, min_length=10, strong_length=16):
-    if word_in_file(password, "wordlist.txt", case_sensitive=False):
+    if word_in_file(password, wordlist_path, case_sensitive=False):
         print("Password is a dictionary word and is not secure.")
         return 0
-    if word_in_file(password, "toppasswords.txt", case_sensitive=True):
+    if word_in_file(password, toplist_path, case_sensitive=True):
         print("Password is a commonly used password and is not secure.")
         return 0
     if len(password) < min_length:
