@@ -1,0 +1,36 @@
+CSE 111 Proposal for a Student Chosen Program
+
+    (This is a proposal. All proposals are written with our best
+    knowledge at the beginning of a project. As we progress from the
+    beginning to the end of a project, we gain more knowledge, and we
+    change some of our proposed ideas. This is part of completing any
+    project and is fine.  However, we still must write a proposal so
+    that our teachers or supervisors know what we intend to do. Please
+    answer each of the following questions to the best of your
+    knowledge.)
+
+1. What is the title of your program?
+Survey Data Analyzer
+
+2. What real-world problem will your program address or help to solve?
+It helps organizations and students analyze survey results efficiently, revealing trends and summaries from raw CSV data.
+
+3. What will you learn from developing this program?
+I will learn to use pandas and matplotlib for data analysis and visualization, and also practice writing reusable and testable Python functions.
+
+4. What Python modules will your program use?
+
+   pandas, matplotlib, pytest
+
+5. List the names of functions you will need?
+
+load_csv_file(filename)
+calculate_average_by_column(data, group_col, value_col)
+count_responses(data, column_name)
+generate_bar_chart(data, title, xlabel, ylabel)
+main()
+
+6. List the names of the test functions you will write.
+
+test_calculate_average_by_column()
+test_count_responses()
