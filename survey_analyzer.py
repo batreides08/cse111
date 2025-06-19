@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
 
 
 def load_csv_file(filename):
@@ -29,7 +30,14 @@ def generate_bar_chart(data, title, xlabel, ylabel):
 
 
 def main():
-    filename = input("Enter the survey CSV filename: ")
+    filename = input("Enter the survey CSV filename (or press Enter to use 'survey_data.csv'): ").strip()
+    if filename == "":
+        filename = "survey_data.csv"
+
+    if not os.path.isfile(filename):
+        print(f"Error: File '{filename}' not found.")
+        return
+
     data = load_csv_file(filename)
 
     print("\nAverage age by city:")

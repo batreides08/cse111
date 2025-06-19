@@ -1,0 +1,16 @@
+Second Report for a Student Chosen Project
+
+===============Time Spent================
+|   Date      | Hours | Description of Work                                  
+|-------------|-------|-------------------------------------------------------
+| 2024-06-16  | 1.0   | Reviewed project requirements and brainstormed ideas  
+| 2024-06-17  | 1.5   | Wrote proposal.txt and planned program structure      
+| 2024-06-18  | 9.5   | Coded main program, created test functions, fixed errors,
+|             |       | installed packages, and tested full project           
+===============Time Spent================
+
+
+
+2. In Canvas, submit this completed text file, your Python program, your
+Python test file, and any project data files such as .txt and .csv files and
+link to video walkthrough if needed.
