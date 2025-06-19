@@ -1,11 +1,12 @@
 import csv
+from datetime import datetime
 
 def read_dictionary(filename, key_column_index):
-   
+    
     result_dict = {}
     with open(filename, "r", newline='') as csvfile:
         reader = csv.reader(csvfile)
-        next(reader)  # Skip header row
+        next(reader)
         for row in reader:
             if len(row) > 0:
                 key = row[key_column_index]
@@ -14,47 +15,57 @@ def read_dictionary(filename, key_column_index):
 
 
 def main():
-    
-    products_dict = read_dictionary("products.csv", 0)
+    try:
+        # Store name
+        print("Gentri Store")
 
-   
-    print("All Products")
-    print(products_dict)
+        # Load products dictionary
+        products_dict = read_dictionary("products.csv", 0)
 
-    
-    with open("request.csv", "r", newline='') as request_file:
-        reader = csv.reader(request_file)
-        next(reader)  # Skip header row
+        # Open and read the request file
+        with open("request.csv", "r", newline='') as request_file:
+            reader = csv.reader(request_file)
+            next(reader) 
+            subtotal = 0
+            total_items = 0
+            SALES_TAX_RATE = 0.06
 
-        subtotal = 0
-        SALES_TAX_RATE = 0.06
+            for row in reader:
+                if len(row) > 0:
+                    prod_num = row[0]
+                    quantity = int(row[1])
+                    try:
+                        prod_info_list = products_dict[prod_num]
+                        name = prod_info_list[1]
+                        price = float(prod_info_list[2])
+                        line_total = price * quantity
+                        subtotal += line_total
+                        total_items += quantity
 
-        print("\nRequested Items:")
+                        print(f"{name}: {quantity} @ ${price:.2f}")
+                    except KeyError:
+                        print(f"Error: unknown product ID in the request.csv file\n'{prod_num}'")
 
-        for row in reader:
-            if len(row) > 0:
-                product_number = row[0]
-                quantity = int(row[1])
-                
-                product_info = products_dict.get(product_number)
-                if product_info:
-                    name = product_info[1]
-                    price = float(product_info[2])
-                    line_total = price * quantity
-                    subtotal += line_total
+            # Totals
+            sales_tax = subtotal * SALES_TAX_RATE
+            total = subtotal + sales_tax
 
-                    print(f"{name}: {quantity} @ ${price:.2f}")
-        
-       
-        sales_tax = subtotal * SALES_TAX_RATE
-        total = subtotal + sales_tax
+            print(f"Number of Items: {total_items}")
+            print(f"Subtotal: {subtotal:.2f}")
+            print(f"Sales Tax: {sales_tax:.2f}")
+            print(f"Total: {total:.2f}")
+            print("Thank you for shopping at the Gentri Store.")
 
-       
-        print()
-        print(f"Subtotal: ${subtotal:.2f}")
-        print(f"Sales Tax: ${sales_tax:.2f}")
-        print(f"Total: ${total:.2f}")
+            # Current date and time
+            current_date_and_time = datetime.now()
+            print(current_date_and_time.strftime("%a %b %d %I:%M:%S %Y"))
 
+    except FileNotFoundError as e:
+        print("Error: missing file")
+        print(e)
+    except PermissionError as e:
+        print("Error: permission denied")
+        print(e)
 
 
 if __name__ == "__main__":
